@@ -78,7 +78,7 @@ sub get_normalizer_for_file {
             $_ = shift;
             # pom.properties, version.properties
             if (m/(pom|version)\.properties$/) {
-		require File::StripNondeterminism::handlers::javaproperties;
+                require File::StripNondeterminism::handlers::javaproperties;
                 return File::StripNondeterminism::handlers::javaproperties::is_java_properties_file($_);
                 }
 	} => 'javaproperties',
@@ -86,6 +86,10 @@ sub get_normalizer_for_file {
             $_ = shift;
             m/\.(zip|pk3|whl|xpi)$/ && _get_file_type($_) =~ m/Zip archive data/;
         } => 'zip',
+        sub {
+            $_ = shift;
+            /\.car$/ && _get_file_type($_) =~ m/(Java|Zip) archive data/
+        } => 'car',
       ];
     
     for my $m (@$map) {
