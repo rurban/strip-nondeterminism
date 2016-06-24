@@ -1,8 +1,5 @@
 use strict;
-use warnings;
 use ExtUtils::MakeMaker;
-
-my $MMVER = eval $ExtUtils::MakeMaker::VERSION;
 
 WriteMakefile(
 	NAME		=> 'strip-nondeterminism',
